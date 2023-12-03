@@ -25,27 +25,50 @@ public class Day01Test {
                         .andThen(Pair.cross(timesTen, id))
                         .andThen(sum);
 
-        return input.map(processLine).reduce(0, (a, b) -> a+b);
+        return input.map(processLine).reduce(0, Integer::sum);
     }
+
+    static String[] DIGITS = {
+            "zero",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+    };
 
     private Integer firstDigitInString(String s) {
         for (int i = 0; i < s.length(); i++) {
             if (isDigit(s.charAt(i))) {
                 return s.charAt(i) - '0';
             }
-            if (s.startsWith("two")) {
-                return 2;
+            String startingAtIndex = s.substring(i);
+            for (int j = 1; j < DIGITS.length; j++) {
+                if (startingAtIndex.startsWith(DIGITS[j])) {
+                    return j;
+                }
             }
         }
         throw new IllegalStateException("Not found");
     }
 
     private Integer lastDigitInString(String s) {
-        var digit = s.chars().boxed().toList()
-                .reversed().stream()
-                .filter(Character::isDigit).findFirst().orElseThrow();
-
-        return digit - '0';
+        for (int i = s.length()-1; i >= 0; i--) {
+            if (isDigit(s.charAt(i))) {
+                return s.charAt(i) - '0';
+            }
+            String startingAtIndex = s.substring(i);
+            for (int j = 1; j < DIGITS.length; j++) {
+                if (startingAtIndex.startsWith(DIGITS[j])) {
+                    return j;
+                }
+            }
+        }
+        throw new IllegalStateException("Not found");
     }
 
     @Test
@@ -61,7 +84,6 @@ public class Day01Test {
     }
 
     @Test
-    @Disabled("WIP")
     void acceptance2() {
         var input = """
 two1nine
@@ -91,6 +113,7 @@ zoneight234
     @Test
     void testFirstNumberInWords() {
         assertThat(firstDigitInString("two1nine")).isEqualTo(2);
+        assertThat(firstDigitInString("abcone2threexyz")).isEqualTo(1);
     }
 
     @Test
@@ -99,4 +122,10 @@ zoneight234
         assertThat(lastDigitInString("sss2abc")).isEqualTo(2);
     }
 
+    @Test
+    void testLastDigitInWords() {
+        assertThat(lastDigitInString("4nineeightseven2")).isEqualTo(2);
+        assertThat(lastDigitInString("4nineeightseven")).isEqualTo(7);
+        assertThat(lastDigitInString("4nineeightaaaa")).isEqualTo(8);
+    }
 }
