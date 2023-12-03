@@ -1,3 +1,5 @@
+package it.xpug.advent2023;
+
 import java.util.function.Function;
 
 public record Pair<L, R>(L left, R right) {
@@ -6,7 +8,7 @@ public record Pair<L, R>(L left, R right) {
         return new Pair<>(left, right);
     }
 
-    public static <A, B, C> Function<A, Pair<A, C>> split(Function<A, B> f, Function<A, C> g) {
+    public static <A, B, C> Function<A, Pair<B, C>> split(Function<A, B> f, Function<A, C> g) {
         return a -> new Pair(f.apply(a), g.apply(a));
     }
 
