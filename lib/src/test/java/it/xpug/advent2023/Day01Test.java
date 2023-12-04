@@ -1,6 +1,7 @@
 package it.xpug.advent2023;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.IOException;
@@ -86,7 +87,9 @@ public class Day01Test {
                 treb7uchet
                 """;
 
-        assertThat(day01(Arrays.stream(input.split("\n")))).isEqualTo(142);
+        Integer actual = day01(Arrays.stream(input.split("\n")));
+
+        assertThat(actual).isEqualTo(142);
     }
 
     @Test
@@ -101,7 +104,9 @@ public class Day01Test {
                 7pqrstsixteen
                 """;
 
-        assertThat(day01(Arrays.stream(input.split("\n")))).isEqualTo(281);
+        Integer actual = day01(Arrays.stream(input.split("\n")));
+
+        assertThat(actual).isEqualTo(281);
     }
 
     @Test
@@ -110,20 +115,26 @@ public class Day01Test {
         System.out.println(result);
     }
 
-    void testFirstDigitInString() {
-        assertThat(firstDigitInString("1abc")).isEqualTo(1);
-        assertThat(firstDigitInString("sss2abc")).isEqualTo(2);
-        assertThat(firstDigitInString("two1nine")).isEqualTo(2);
-        assertThat(firstDigitInString("abcone2threexyz")).isEqualTo(1);
+    @ParameterizedTest
+    @CsvSource({
+            "1abc, 1",
+            "sss2abc, 2",
+            "two1nine, 2",
+            "abcone2threexyz, 1",
+    })
+    void testFirstDigitInString(String s, int expected) {
+        assertThat(firstDigitInString(s)).isEqualTo(expected);
     }
 
-    @Test
-    void testLastDigitInString() {
-        assertThat(lastDigitInString("1a4bc")).isEqualTo(4);
-        assertThat(lastDigitInString("sss2abc")).isEqualTo(2);
-        assertThat(lastDigitInString("4nineeightseven2")).isEqualTo(2);
-        assertThat(lastDigitInString("4nineeightseven")).isEqualTo(7);
-        assertThat(lastDigitInString("4nineeightaaaa")).isEqualTo(8);
+    @ParameterizedTest
+    @CsvSource({
+            "1a4bc, 4",
+            "sss2abc, 2",
+            "4nineeightseven2, 2",
+            "4nineeightseven, 7",
+            "4nineeightaaaa, 8",
+    })
+    void testLastDigitInString(String s, int expected) {
+        assertThat(lastDigitInString(s)).isEqualTo(expected);
     }
-
 }
