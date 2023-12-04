@@ -1,3 +1,5 @@
+package it.xpug.advent2023;
+
 import it.xpug.advent2023.Pair;
 import org.junit.jupiter.api.Test;
 
