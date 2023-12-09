@@ -50,11 +50,6 @@ public class Day03Test {
         );
     }
 
-    @Test
-    void findPartNumbers() {
-
-    }
-
     @ParameterizedTest
     @CsvSource({
             "0, 0, 3, 0, 3, true , same row symbol right",
@@ -72,5 +67,22 @@ public class Day03Test {
         assertThat(a.isAdjacentTo(b))
                 .describedAs(description)
                 .isEqualTo(expected);
+    }
+
+    @Test
+    void findPartNumbers() {
+        Day03 day03 = new Day03(SAMPLE);
+
+        List<Number> numbers = day03.findPartNumbers();
+
+        assertThat(numbers).doesNotContain(
+                Number.of(0, 5, 8),
+                Number.of(5, 7, 9)
+        );
+
+        assertThat(numbers).contains(
+                Number.of(0, 0, 3)
+        );
+
     }
 }

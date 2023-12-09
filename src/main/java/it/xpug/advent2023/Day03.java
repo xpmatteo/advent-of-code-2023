@@ -37,6 +37,15 @@ public class Day03 {
         return result;
     }
 
+    public List<Number> findPartNumbers() {
+        var symbols = symbols();
+
+        return delimitNumbers().stream()
+                .filter(number -> symbols.stream().anyMatch(number::isAdjacentTo))
+                .toList()
+                ;
+    }
+
     public record Symbol(int row, int column) {
         public static Symbol of(int row, int column) {
             return new Symbol(row, column);
