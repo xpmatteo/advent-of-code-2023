@@ -25,13 +25,13 @@ public class Day03 {
         return result;
     }
 
-    public List<PartNumber> symbols() {
-        List<PartNumber> result = new ArrayList<>();
+    public List<Symbol> symbols() {
+        List<Symbol> result = new ArrayList<>();
         Pattern pattern = Pattern.compile("[^.\\d\\s]");
         for (int i = 0; i < this.lines.size(); i++) {
             var results = pattern.matcher(lines.get(i)).results().toList();
             for (MatchResult matchResult : results) {
-                result.add(PartNumber.of(i, matchResult.start(), matchResult.end()));
+                result.add(Symbol.of(i, matchResult.start()));
             }
         }
         return result;

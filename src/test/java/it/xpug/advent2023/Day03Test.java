@@ -1,6 +1,7 @@
 package it.xpug.advent2023;
 
 import it.xpug.advent2023.Day03.PartNumber;
+import it.xpug.advent2023.Day03.Symbol;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -41,11 +42,11 @@ public class Day03Test {
     void findSymbols() {
         Day03 day03 = new Day03(SAMPLE);
 
-        List<PartNumber> coordinates = day03.symbols();
+        List<Symbol> symbols = day03.symbols();
 
-        assertThat(coordinates).contains(
-                PartNumber.of(1, 3, 4),
-                PartNumber.of(3, 6, 7)
+        assertThat(symbols).contains(
+                Symbol.of(1, 3),
+                Symbol.of(3, 6)
         );
     }
 
@@ -62,7 +63,7 @@ public class Day03Test {
     })
     void adjacent(int row1, int columnStart1, int columnEnd1, int row2, int columnStart2, boolean expected, String description) {
         var a = PartNumber.of(row1, columnStart1, columnEnd1);
-        var b = Day03.Symbol.of(row2, columnStart2);
+        var b = Symbol.of(row2, columnStart2);
         assertThat(a.isAdjacentTo(b))
                 .describedAs(description)
                 .isEqualTo(expected);
