@@ -13,13 +13,13 @@ public class Day03 {
         this.lines = Arrays.asList(input.split("\n"));
     }
 
-    public List<PartNumber> delimitNumbers() {
-        List<PartNumber> result = new ArrayList<>();
+    public List<Number> delimitNumbers() {
+        List<Number> result = new ArrayList<>();
         Pattern pattern = Pattern.compile("\\d+");
         for (int row = 0; row < this.lines.size(); row++) {
             var results = pattern.matcher(lines.get(row)).results().toList();
             for (MatchResult matchResult : results) {
-                result.add(PartNumber.of(row, matchResult.start(), matchResult.end()));
+                result.add(Number.of(row, matchResult.start(), matchResult.end()));
             }
         }
         return result;
@@ -43,9 +43,9 @@ public class Day03 {
         }
     }
 
-    public record PartNumber(int row, int columnStart, int columnEnd) {
-        public static PartNumber of(int row, int columnStart, int columnEnd) {
-            return new PartNumber(row, columnStart, columnEnd);
+    public record Number(int row, int columnStart, int columnEnd) {
+        public static Number of(int row, int columnStart, int columnEnd) {
+            return new Number(row, columnStart, columnEnd);
         }
 
         public boolean isAdjacentTo(Symbol other) {

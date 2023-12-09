@@ -1,6 +1,6 @@
 package it.xpug.advent2023;
 
-import it.xpug.advent2023.Day03.PartNumber;
+import it.xpug.advent2023.Day03.Number;
 import it.xpug.advent2023.Day03.Symbol;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,15 +26,15 @@ public class Day03Test {
 """;
 
     @Test
-    void delimitNumbers() {
+    void findNumbers() {
         Day03 day03 = new Day03(SAMPLE);
 
-        List<PartNumber> coordinates = day03.delimitNumbers();
+        List<Number> coordinates = day03.delimitNumbers();
 
         assertThat(coordinates).contains(
-                PartNumber.of(0, 0, 3),
-                PartNumber.of(0, 5, 8),
-                PartNumber.of(2, 2, 4)
+                Number.of(0, 0, 3),
+                Number.of(0, 5, 8),
+                Number.of(2, 2, 4)
         );
     }
 
@@ -50,6 +50,11 @@ public class Day03Test {
         );
     }
 
+    @Test
+    void findPartNumbers() {
+
+    }
+
     @ParameterizedTest
     @CsvSource({
             "0, 0, 3, 0, 3, true , same row symbol right",
@@ -62,7 +67,7 @@ public class Day03Test {
             "2, 1, 3, 3, 0, true , diagonal down left",
     })
     void adjacent(int row1, int columnStart1, int columnEnd1, int row2, int columnStart2, boolean expected, String description) {
-        var a = PartNumber.of(row1, columnStart1, columnEnd1);
+        var a = Number.of(row1, columnStart1, columnEnd1);
         var b = Symbol.of(row2, columnStart2);
         assertThat(a.isAdjacentTo(b))
                 .describedAs(description)
