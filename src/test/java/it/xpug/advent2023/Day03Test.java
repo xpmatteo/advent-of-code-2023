@@ -1,6 +1,6 @@
 package it.xpug.advent2023;
 
-import it.xpug.advent2023.Day03.Coordinates;
+import it.xpug.advent2023.Day03.PartNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -28,12 +28,12 @@ public class Day03Test {
     void delimitNumbers() {
         Day03 day03 = new Day03(SAMPLE);
 
-        List<Coordinates> coordinates = day03.delimitNumbers();
+        List<PartNumber> coordinates = day03.delimitNumbers();
 
         assertThat(coordinates).contains(
-                Coordinates.of(0, 0, 3),
-                Coordinates.of(0, 5, 8),
-                Coordinates.of(2, 2, 4)
+                PartNumber.of(0, 0, 3),
+                PartNumber.of(0, 5, 8),
+                PartNumber.of(2, 2, 4)
         );
     }
 
@@ -41,11 +41,11 @@ public class Day03Test {
     void findSymbols() {
         Day03 day03 = new Day03(SAMPLE);
 
-        List<Coordinates> coordinates = day03.symbols();
+        List<PartNumber> coordinates = day03.symbols();
 
         assertThat(coordinates).contains(
-                Coordinates.of(1, 3, 4),
-                Coordinates.of(3, 6, 7)
+                PartNumber.of(1, 3, 4),
+                PartNumber.of(3, 6, 7)
         );
     }
 
@@ -57,8 +57,8 @@ public class Day03Test {
 //            "0, 0, 3, 1, 3, 4, true , diagonal right",
     })
     void adjacent(int row1, int columnStart1, int columnEnd1, int row2, int columnStart2, int columnEnd2, boolean expected, String description) {
-        Coordinates a = Coordinates.of(row1, columnStart1, columnEnd1);
-        Coordinates b = Coordinates.of(row2, columnStart2, columnEnd2);
+        PartNumber a = PartNumber.of(row1, columnStart1, columnEnd1);
+        PartNumber b = PartNumber.of(row2, columnStart2, columnEnd2);
         assertThat(a.isAdjacentTo(b))
                 .describedAs(description + " a<->b")
                 .isEqualTo(expected);

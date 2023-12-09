@@ -13,36 +13,36 @@ public class Day03 {
         this.lines = Arrays.asList(input.split("\n"));
     }
 
-    public List<Coordinates> delimitNumbers() {
-        List<Coordinates> result = new ArrayList<>();
+    public List<PartNumber> delimitNumbers() {
+        List<PartNumber> result = new ArrayList<>();
         Pattern pattern = Pattern.compile("\\d+");
         for (int i = 0; i < this.lines.size(); i++) {
             var results = pattern.matcher(lines.get(i)).results().toList();
             for (MatchResult matchResult : results) {
-                result.add(Coordinates.of(i, matchResult.start(), matchResult.end()));
+                result.add(PartNumber.of(i, matchResult.start(), matchResult.end()));
             }
         }
         return result;
     }
 
-    public List<Coordinates> symbols() {
-        List<Coordinates> result = new ArrayList<>();
+    public List<PartNumber> symbols() {
+        List<PartNumber> result = new ArrayList<>();
         Pattern pattern = Pattern.compile("[^.\\d\\s]");
         for (int i = 0; i < this.lines.size(); i++) {
             var results = pattern.matcher(lines.get(i)).results().toList();
             for (MatchResult matchResult : results) {
-                result.add(Coordinates.of(i, matchResult.start(), matchResult.end()));
+                result.add(PartNumber.of(i, matchResult.start(), matchResult.end()));
             }
         }
         return result;
     }
 
-    public record Coordinates(int row, int columnStart, int columnEnd) {
-        public static Coordinates of(int row, int columnStart, int columnEnd) {
-            return new Coordinates(row, columnStart, columnEnd);
+    public record PartNumber(int row, int columnStart, int columnEnd) {
+        public static PartNumber of(int row, int columnStart, int columnEnd) {
+            return new PartNumber(row, columnStart, columnEnd);
         }
 
-        public boolean isAdjacentTo(Coordinates other) {
+        public boolean isAdjacentTo(PartNumber other) {
             boolean sameRow = this.columnEnd == other.columnStart && this.row == other.row
                     || other.columnEnd == this.columnStart && this.row == other.row;
 
