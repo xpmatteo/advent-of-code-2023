@@ -37,9 +37,18 @@ public class Day03 {
         return result;
     }
 
-    public static record Coordinates(int row, int columnStart, int columnEnd) {
+    public record Coordinates(int row, int columnStart, int columnEnd) {
         public static Coordinates of(int row, int columnStart, int columnEnd) {
             return new Coordinates(row, columnStart, columnEnd);
+        }
+
+        public boolean isAdjacentTo(Coordinates other) {
+            boolean sameRow = this.columnEnd == other.columnStart && this.row == other.row
+                    || other.columnEnd == this.columnStart && this.row == other.row;
+
+            boolean diagonal = other.row == this.row + 1 && other.columnEnd == this.columnEnd + 1;
+            return sameRow || diagonal
+                    ;
         }
     }
 }
