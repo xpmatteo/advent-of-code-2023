@@ -46,6 +46,17 @@ public class Day03 {
                 ;
     }
 
+    public int sumOfPartNumbers() {
+        return findPartNumbers().stream()
+                .mapToInt(this::valueOfNumber)
+                .sum()
+                ;
+    }
+
+    public int valueOfNumber(Number number) {
+        return Integer.parseInt(lines.get(number.row).substring(number.columnStart, number.columnEnd));
+    }
+
     public record Symbol(int row, int column) {
         public static Symbol of(int row, int column) {
             return new Symbol(row, column);

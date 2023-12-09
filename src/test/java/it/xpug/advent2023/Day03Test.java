@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -79,10 +80,37 @@ public class Day03Test {
                 Number.of(0, 5, 8),
                 Number.of(5, 7, 9)
         );
-
         assertThat(numbers).contains(
                 Number.of(0, 0, 3)
         );
+    }
 
+    @Test
+    void valueOfNumber() {
+        Day03 day03 = new Day03(SAMPLE);
+
+        int value = day03.valueOfNumber(Number.of(0, 0, 3));
+
+        assertThat(value).isEqualTo(467);
+    }
+
+    @Test
+    void sumOfPartNumbers() {
+        Day03 day03 = new Day03(SAMPLE);
+
+        int sum = day03.sumOfPartNumbers();
+
+        assertThat(sum).isEqualTo(4361);
+    }
+
+    @Test
+    void acceptancePart1() throws IOException {
+        // read all bytes of file into a string
+        String data = new String(getClass().getResourceAsStream("/day03.txt").readAllBytes());
+        Day03 day03 = new Day03(data);
+
+        int sum = day03.sumOfPartNumbers();
+
+        assertThat(sum).isEqualTo(544664);
     }
 }
