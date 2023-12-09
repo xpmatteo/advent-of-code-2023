@@ -37,18 +37,25 @@ public class Day03 {
         return result;
     }
 
+    public record Symbol(int row, int column) {
+        public static Symbol of(int row, int column) {
+            return new Symbol(row, column);
+        }
+    }
+
     public record PartNumber(int row, int columnStart, int columnEnd) {
         public static PartNumber of(int row, int columnStart, int columnEnd) {
             return new PartNumber(row, columnStart, columnEnd);
         }
 
-        public boolean isAdjacentTo(PartNumber other) {
-            boolean sameRow = this.columnEnd == other.columnStart && this.row == other.row
-                    || other.columnEnd == this.columnStart && this.row == other.row;
-
-            boolean diagonal = other.row == this.row + 1 && other.columnEnd == this.columnEnd + 1;
-            return sameRow || diagonal
-                    ;
+        public boolean isAdjacentTo(Symbol other) {
+            if (this.row == other.row) {
+                return this.columnEnd == other.column || other.column + 1 == this.columnStart;
+            }
+            if (Math.abs(this.row - other.row) == 1) {
+                return other.column >= this.columnStart-1 && other.column <= this.columnEnd;
+            }
+            return false;
         }
     }
 }
