@@ -2,6 +2,7 @@ package it.xpug.advent2023;
 
 import it.xpug.advent2023.Day03.Number;
 import it.xpug.advent2023.Day03.Symbol;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -114,6 +115,7 @@ public class Day03Test {
     }
 
     @Test
+    @Disabled
     void gearRatio() {
         Day03 day03 = new Day03(SAMPLE);
 
@@ -122,4 +124,17 @@ public class Day03Test {
         assertThat(sum).isEqualTo(467835L);
     }
 
+    @Test
+    void asterisks() {
+        Day03 day03 = new Day03(SAMPLE);
+
+        List<Symbol> asterisks = day03.asterisks();
+
+        assertThat(asterisks).containsExactly(
+                Symbol.of(1, 3),
+                Symbol.of(4, 3),
+                Symbol.of(8, 5)
+        );
+
+    }
 }

@@ -61,6 +61,17 @@ public class Day03 {
         return 1;
     }
 
+    public List<Symbol> asterisks() {
+        return this.symbols().stream()
+                .filter(symbol -> valueOfSymbol(symbol) == '*')
+                .toList()
+                ;
+    }
+
+    private char valueOfSymbol(Symbol symbol) {
+        return lines.get(symbol.row).charAt(symbol.column);
+    }
+
     public record Symbol(int row, int column) {
         public static Symbol of(int row, int column) {
             return new Symbol(row, column);
