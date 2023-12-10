@@ -105,7 +105,6 @@ public class Day03Test {
 
     @Test
     void acceptancePart1() throws IOException {
-        // read all bytes of file into a string
         String data = new String(getClass().getResourceAsStream("/day03.txt").readAllBytes());
         Day03 day03 = new Day03(data);
 
@@ -113,4 +112,14 @@ public class Day03Test {
 
         assertThat(sum).isEqualTo(544664);
     }
+
+    @Test
+    void gearRatio() {
+        Day03 day03 = new Day03(SAMPLE);
+
+        long sum = day03.gearRatio();
+
+        assertThat(sum).isEqualTo(467835L);
+    }
+
 }

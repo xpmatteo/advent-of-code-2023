@@ -57,6 +57,10 @@ public class Day03 {
         return Integer.parseInt(lines.get(number.row).substring(number.columnStart, number.columnEnd));
     }
 
+    public long gearRatio() {
+        return 1;
+    }
+
     public record Symbol(int row, int column) {
         public static Symbol of(int row, int column) {
             return new Symbol(row, column);
