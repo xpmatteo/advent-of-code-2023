@@ -135,6 +135,17 @@ public class Day03Test {
                 Symbol.of(4, 3),
                 Symbol.of(8, 5)
         );
+    }
 
+    @Test
+    void neighborsOfSymbol() {
+        Day03 day03 = new Day03(SAMPLE);
+
+        List<Number> neighbors = day03.neighborsOfSymbol(Symbol.of(1, 3));
+
+        assertThat(neighbors).containsExactly(
+                Number.of(0, 0, 3),
+                Number.of(2, 2, 4)
+        );
     }
 }

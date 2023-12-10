@@ -72,6 +72,12 @@ public class Day03 {
         return lines.get(symbol.row).charAt(symbol.column);
     }
 
+    public List<Number> neighborsOfSymbol(Symbol symbol) {
+        return delimitNumbers().stream()
+                .filter(number -> number.isAdjacentTo(symbol))
+                .toList();
+    }
+
     public record Symbol(int row, int column) {
         public static Symbol of(int row, int column) {
             return new Symbol(row, column);
