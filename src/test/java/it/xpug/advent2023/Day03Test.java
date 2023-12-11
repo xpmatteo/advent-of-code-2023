@@ -2,7 +2,6 @@ package it.xpug.advent2023;
 
 import it.xpug.advent2023.Day03.Number;
 import it.xpug.advent2023.Day03.Symbol;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -115,13 +114,22 @@ public class Day03Test {
     }
 
     @Test
-    @Disabled
-    void gearRatio() {
+    void gearRatioOfSample() {
         Day03 day03 = new Day03(SAMPLE);
 
-        long sum = day03.gearRatio();
+        long sum = day03.sumOfAllGearRatios();
 
         assertThat(sum).isEqualTo(467835L);
+    }
+
+    @Test
+    void acceptancePart2() throws IOException {
+        String data = new String(getClass().getResourceAsStream("/day03.txt").readAllBytes());
+        Day03 day03 = new Day03(data);
+
+        long sum = day03.sumOfAllGearRatios();
+
+        assertThat(sum).isEqualTo(84495585L);
     }
 
     @Test
@@ -146,6 +154,18 @@ public class Day03Test {
         assertThat(neighbors).containsExactly(
                 Number.of(0, 0, 3),
                 Number.of(2, 2, 4)
+        );
+    }
+
+    @Test
+    void gearRatios() {
+        Day03 day03 = new Day03(SAMPLE);
+
+        List<Integer> ratios = day03.gearRatios();
+
+        assertThat(ratios).containsExactly(
+                467*35,
+                755*598
         );
     }
 }

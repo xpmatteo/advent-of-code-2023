@@ -57,8 +57,8 @@ public class Day03 {
         return Integer.parseInt(lines.get(number.row).substring(number.columnStart, number.columnEnd));
     }
 
-    public long gearRatio() {
-        return 1;
+    public long sumOfAllGearRatios() {
+        return this.gearRatios().stream().mapToLong(Long::valueOf).sum();
     }
 
     public List<Symbol> asterisks() {
@@ -75,6 +75,14 @@ public class Day03 {
     public List<Number> neighborsOfSymbol(Symbol symbol) {
         return delimitNumbers().stream()
                 .filter(number -> number.isAdjacentTo(symbol))
+                .toList();
+    }
+
+    public List<Integer> gearRatios() {
+        return asterisks().stream()
+                .map(this::neighborsOfSymbol)
+                .filter(numbers -> numbers.size() == 2)
+                .map(numbers -> valueOfNumber(numbers.get(0)) * valueOfNumber(numbers.get(1)))
                 .toList();
     }
 
